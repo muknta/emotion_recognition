@@ -1,0 +1,109 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css-includes %}
+	
+{% endblock css-includes %}
+
+
+
+{% block content %}
+	<div class="flex-container">
+		<div class="filter">
+			<h2>ФИЛЬТР</h2>
+			<input class="form-check-input" type="checkbox" id="anger-check-1">
+			<label class="form-check-label" for="anger-check-1">
+				anger
+			</label>
+			<input class="form-check-input" type="checkbox" id="disgust-check-1">
+			<label class="form-check-label" for="disgust-check-1">
+				disgust
+			</label>
+			<input class="form-check-input" type="checkbox" id="fear-check-1">
+			<label class="form-check-label" for="fear-check-1">
+				fear
+			</label>
+			<input class="form-check-input" type="checkbox" id="happiness-check-1">
+			<label class="form-check-label" for="happiness-check-1">
+				happiness
+			</label>
+			<input class="form-check-input" type="checkbox" id="neutral-check-1">
+			<label class="form-check-label" for="neutral-check-1">
+				neutral
+			</label>
+			<input class="form-check-input" type="checkbox" id="sadness-check-1">
+			<label class="form-check-label" for="sadness-check-1">
+				sadness
+			</label>
+			<input class="form-check-input" type="checkbox" id="surprise-check-1">
+			<label class="form-check-label" for="surprise-check-1">
+				surprise
+			</label>
+		</div>
+		<div class="content-container">
+			<div class="items-container">
+				{% for photo in album %}
+				<div id="item-{{photo.pk}}" class="item" onmouseover="disBlock('item-{{photo.pk}}')" onmouseout="disHide('item-{{photo.pk}}')">
+					<a id="ex" href="{% url 'photo-detail' photo.pk %}"><img src="{% static photo.name_id %}" alt="photo" style="max-width:200px;max-height:200px;"></a>
+					<a href="{% url 'photo-detail' photo.pk %}" class="device-name">{{photo.name_id}}</a>
+					<div class="hidden-specs">
+						<p class="arcticle-content">
+							<span class="descrip-text">anger:</span> {{photo.anger}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">disgust:</span> {{photo.disgust}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">fear:</span> {{photo.fear}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">happiness:</span> {{photo.happiness}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">neutral:</span> {{photo.neutral}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">sadness:</span> {{photo.sadness}}
+						</p>
+						<p class="arcticle-content">
+							<span class="descrip-text">surprise:</span> {{photo.surprise}}
+						</p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<li></li>
+			<div class="pages">
+			{% if is_paginated %}
+				{% if page_obj.has_previous %}
+					<a href="?page=1" class="btn btn-outline-secondary mb-4">First</a>
+					<a href="?page={{page_obj.previous_page_number}}" class="btn btn-outline-secondary mb-4">Prev.</a>
+				{% endif %}
+				{% for num in page_obj.paginator.page_range %}
+					{% if page_obj.number == num %}
+						<a href="?page={{num}}" class="btn btn-secondary mb-4">{{num}}</a>
+					{% elif num > page_obj.number|add:'-5' and num < page_obj.number|add:'5' %}
+						<a href="?page={{num}}" class="btn btn-outline-secondary mb-4">{{num}}</a>
+					{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+					<a href="?page={{page_obj.next_page_number}}" class="btn btn-outline-secondary mb-4">Next</a>
+					<a href="?page={{page_obj.paginator.num_pages}}" class="btn btn-outline-secondary mb-4">Last</a>
+				{% endif %}
+			{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+
+
+
+{% block js-includes %}
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/sql.js"></script>
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/worker.sql.js"></script>
+	<script src="{% static 'main/scripts/main.js' %}"></script>
+<script type="text/javascript">
+
+
+</script>
+{% endblock js-includes %}

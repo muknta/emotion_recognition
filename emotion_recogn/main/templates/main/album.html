@@ -1,0 +1,65 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css-includes %}
+	
+{% endblock css-includes %}
+
+
+
+{% block content %}
+	<div class="flex-container">
+		<div class="filter">
+			<h2>ФИЛЬТР</h2>
+			<input class="form-check-input" type="checkbox" id="anger-check" value="anger">
+			<label class="form-check-label" for="anger-check">
+				anger
+			</label>
+			<input class="form-check-input" type="checkbox" id="disgust-check" value="disgust">
+			<label class="form-check-label" for="disgust-check">
+				disgust
+			</label>
+			<input class="form-check-input" type="checkbox" id="fear-check" value="fear">
+			<label class="form-check-label" for="fear-check">
+				fear
+			</label>
+			<input class="form-check-input" type="checkbox" id="happiness-check" value="happiness">
+			<label class="form-check-label" for="happiness-check">
+				happiness
+			</label>
+			<input class="form-check-input" type="checkbox" id="neutral-check" value="neutral">
+			<label class="form-check-label" for="neutral-check">
+				neutral
+			</label>
+			<input class="form-check-input" type="checkbox" id="sadness-check" value="sadness">
+			<label class="form-check-label" for="sadness-check">
+				sadness
+			</label>
+			<input class="form-check-input" type="checkbox" id="surprise-check" value="surprise">
+			<label class="form-check-label" for="surprise-check">
+				surprise
+			</label>
+		</div>
+		<div class="content-container">
+			<div id="album" class="items-container">
+				
+			</div>
+		</div>
+	</div>
+	<div id="moreBlock">
+		<a id="moreBtn" class="btn btn-success btn-block" href="#">Load more</a>
+		<span id="phNumStatus"></span>
+	</div>
+{% endblock content %}
+
+
+
+{% block js-includes %}
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/sql.js"></script>
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/worker.sql.js"></script>
+	<script src="{% static 'main/scripts/main.js' %}"></script>
+<script type="text/javascript">
+
+
+</script>
+{% endblock js-includes %}
