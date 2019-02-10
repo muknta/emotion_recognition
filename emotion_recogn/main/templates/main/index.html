@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+{%  block css-includes %}
+	<link rel = "stylesheet" href="{% static 'main/styles/album.css' %}">
+{% endblock css-includes %}
+
+{% block content %}
+<style>
+	body {
+		text-align: center;
+	}
+	.marg {
+		margin-top: 30px;
+	}
+	h1{
+		text-align:center;
+		font-family:Broadway;
+	}
+</style>
+<h1 class="marg">Find your emotion</h1>
+<p class="marg">Click on the "Albums" button and find out, what emotions reigned the biggest Kiev programming competition back in 2016</p>
+<div class="marg btn btn-warning"><a href="{% url 'album' "> Albums </a><div>
+{% endblock content %}
+

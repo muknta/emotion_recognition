@@ -9,27 +9,25 @@
 		<title>Emotion_Recognition!</title>
 	{% endif %}
 	<link rel="shortcut icon" href="{% static 'main/img/icon.png' %}">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'main/styles/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'main/styles/main.css' %}">
+	
+
 	{% block css-includes %}{% endblock css-includes %}
 </head>
 <body>
+	<div id="header">
+		<span class="logo"><a href="{% url 'index' %}">
+			OlephirStyle
+		</a></span>
+	</div>
 	{% block content %}{% endblock content %}
-	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-	
-	<!-- jquery..min.js(not slim)
-		need for maphilight.min.js -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<!-- jquery-3.3.1.min.js -->
-	<!-- popper.min.js -->
-	<!-- bootstrap.min.js -->
-	<script src="{% static 'main/scripts/jquery.maphilight.min.js' %}"></script>
-	<!-- hightlight area of map -->
-	<script type="text/javascript">$(function() {
-        $('.modal-img').maphilight();
-    });</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="{% static 'main/scripts/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'main/scripts/popper.min.js' %}"></script>
+	<script src="{% static 'main/scripts/bootstrap.min.js' %}"></script>
+
 	{% block js-includes %}{% endblock js-includes %}
 </body>
 </html>

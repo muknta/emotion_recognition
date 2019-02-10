@@ -10,34 +10,35 @@
 {% block content %}
 	<div class="flex-container">
 		<div class="filter">
-			<h2>ФИЛЬТР</h2>
+			
+			<h2>FILTER</h2>
 			<input class="form-check-input" type="checkbox" id="anger-check" value="anger">
 			<label class="form-check-label" for="anger-check">
-				anger
+				anger &#x1F620
 			</label>
 			<input class="form-check-input" type="checkbox" id="disgust-check" value="disgust">
 			<label class="form-check-label" for="disgust-check">
-				disgust
+				disgust &#128078
 			</label>
 			<input class="form-check-input" type="checkbox" id="fear-check" value="fear">
 			<label class="form-check-label" for="fear-check">
-				fear
+				fear &#x1F631
 			</label>
 			<input class="form-check-input" type="checkbox" id="happiness-check" value="happiness">
 			<label class="form-check-label" for="happiness-check">
-				happiness
+				happiness &#x1F601
 			</label>
 			<input class="form-check-input" type="checkbox" id="neutral-check" value="neutral">
 			<label class="form-check-label" for="neutral-check">
-				neutral
+				neutral &#x1F611
 			</label>
 			<input class="form-check-input" type="checkbox" id="sadness-check" value="sadness">
 			<label class="form-check-label" for="sadness-check">
-				sadness
+				sadness &#x1F614
 			</label>
 			<input class="form-check-input" type="checkbox" id="surprise-check" value="surprise">
 			<label class="form-check-label" for="surprise-check">
-				surprise
+				surprise &#x1F62E
 			</label>
 		</div>
 		<div class="content-container">
@@ -48,7 +49,7 @@
 	</div>
 	<div id="moreBlock">
 		<a id="update" href="{% url 'update' %}" class="btn btn-danger btn-block">UPDATE</a>
-		<button id="moreBtn" class="btn btn-success btn-block" type="button">Load more</button>
+		<a id="moreBtn" class="btn btn-success btn-block">Load more</a>
 		<span id="phNumStatus"></span>
 	</div>
 {% endblock content %}

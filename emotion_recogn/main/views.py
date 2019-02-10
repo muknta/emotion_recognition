@@ -8,7 +8,7 @@ import time
 
 
 def index(request):
-	return redirect('album')
+	return render(request, "main/index.html", {'title': 'Main'})
 
 def album(request):
 	return render(request, "main/album.html", {'title': 'Album'})

@@ -24,10 +24,6 @@ function showModal(elem, modalId, modalImgId){
 	modalImg.src = elem.src;
 }
 
-function hideModal(modalId){
-	var modal = document.getElementById(modalId);
-	modal.style.display = "none";
-}
 
 
 var dbPath = "/static/main/photos.db";
@@ -37,13 +33,20 @@ const FACE_TABLE = "faces";
 const SHOW_PH_NUM = 36;
 var minPh = 1;
 var maxPh = SHOW_PH_NUM;
+var savedMaxPh = 0;
 
-document.addEventListener("DOMContentLoaded", getAjax);
+
+
+document.addEventListener("DOMContentLoaded", function(){
+		getDBtoSetLimit();
+		getAjax();
+	});
 document.getElementById("moreBtn").addEventListener("click", getAjax);
 var emotions = document.querySelectorAll("div.filter input");
 for (var i = 0; i < emotions.length; i++) {
 	emotions[i].addEventListener("click", function(){
 		clearForFilter();
+		getDBtoSetLimit();
 		getAjax();
 	});
 }
@@ -69,8 +72,31 @@ async function demo() {
 }
 
 
+function getDBtoSetLimit() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', dbPath, true);
+	xhr.responseType = 'arraybuffer';
+
+	xhr.addEventListener("load", function() {
+		var uInt8Array = new Uint8Array(this.response);
+		var db = new SQL.Database(uInt8Array);
+		setMaxElemNum(db);
+	});
+	xhr.addEventListener("error", errorRequest);
+	xhr.send();
+}
+
+
+function clearForFilter() {
+	minPh = 1;
+	maxPh = SHOW_PH_NUM;
+	savedMaxPh = 0;
+	document.getElementById("album").innerHTML = "";
+}
+
+
 function getAjax() {
-	console.log("we are here");
+	// console.log("we are here");
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', dbPath, true);
 	xhr.responseType = 'arraybuffer';
@@ -80,27 +106,21 @@ function getAjax() {
 	xhr.send();
 }
 
-function clearForFilter() {
-	minPh = 0;
-	maxPh = SHOW_PH_NUM;
-	document.getElementById("album").innerHTML = "";
-}
-
 
 function loadRequest(evt) {
 	var uInt8Array = new Uint8Array(this.response);
 	var db = new SQL.Database(uInt8Array);
 	//var res = db.exec("SELECT name FROM sqlite_master where type='table'");
-	var urlData = db.exec("SELECT * FROM photos");
+	var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
 	if (urlData[0]) {
 		showMore(db, urlData);
 		minPh += SHOW_PH_NUM;
 		maxPh += SHOW_PH_NUM;
 	} else {
-		moreBlockStatus(0, 0);
+		moreBlockStatus(0);
 	}
 	
-	console.log(JSON.stringify(urlData));
+	// console.log(JSON.stringify(urlData));
 	// document.getElementById("ex").innerHTML = data[0]["column"];
 	// for (i = 0; i < res[0].values.length; i++) {
  //        // console.log(res[0].values[i] + ' ');
@@ -117,10 +137,12 @@ function showMore(db, urlData) {
 	var faceData;
 	var len = (urlData[0] ? urlData[0].values.length : 0);
 	var maxPagePh = (len>maxPh ? maxPh : len);
-	var maxPh2 = maxPh;
+	// savedMaxPh += SHOW_PH_NUM;
+	// var savedMaxPh = maxPh;
 	var alb = document.getElementById("album");
 	for (var i = minPh-1; i < maxPagePh; i++) {
         // console.log(res[0].values[i] + ' ');
+        savedMaxPh++;
         if (urlData[0].values[i]) {
         	var phIdUrlData = urlData[0].values[i][0];
 	        var execCmd = getFaceExecCmd(phIdUrlData);
@@ -131,24 +153,68 @@ function showMore(db, urlData) {
 				maxPagePh++;
 				maxPh++;
 				minPh++;
+				savedMaxPh--;
 			} else {
 				alb.innerHTML += itemTextHtml(urlData, faceData, i);
 	    	}
         } else {
         	alert("asdddddsad");
         	len--;
+        	savedMaxPh--;
         	break;
         }
     }
-    moreBlockStatus(len, maxPh2);
+    moreBlockStatus(savedMaxPh);
 }
- 
+
+
+function setMaxElemNum(db) {
+	var trigger = 0;
+	for (var i = 0; i < emotions.length; i++) {
+		if (emotions[i].checked) {
+			trigger = 2;
+			break;
+		}
+	}
+	var phNumStatus = document.getElementById("phNumStatus");
+	// phNumStatus.innerHTML = "";
+	if (trigger) {
+		var faceData;
+		var len = (urlData[0] ? urlData[0].values.length : 0);
+		var copyLen = len;
+		for (var i = minPh-1; i < copyLen; i++) {
+	        if (urlData[0].values[i]) {
+	        	var phIdUrlData = urlData[0].values[i][0];
+		        var execCmd = getFaceExecCmd(phIdUrlData);
+		        faceData = db.exec(execCmd);
+		        if (faceData[0] == null && execCmd.includes(" AND ")) {
+					urlData = db.exec(getUrlExecCmd(phIdUrlData));
+					len--;
+					maxPh++;
+					minPh++;
+				}
+	        } else {
+	        	alert("asdddddsad");
+	        	len--;
+	        	break;
+	        }
+	    }
+	    phNumStatus.innerHTML = "";
+		phNumStatus.innerHTML = " / "+ len;
+	} else {
+		var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
+		if (urlData[0].values[0]) {
+			phNumStatus.innerHTML = " / "+ urlData[0].values.length;
+		}
+	}
+}
+
 
 function getFaceExecCmd(photoId) {
 	var str = "SELECT * FROM "+ FACE_TABLE +" WHERE photo_id IS "+ photoId;
 	var oldLen = str.length;
 	for (var i = 0; i < emotions.length; i++) {
-		console.log(str);
+		// console.log(str);
 		if (emotions[i].checked) {
 			str += " AND "+ emotions[i].value +">9";
 		}
@@ -165,15 +231,23 @@ function getUrlExecCmd(photoId) {
 }
 
 
-function moreBlockStatus(len, maxPhNum) {
+function moreBlockStatus(maxPhNum) {
 	var moreBtn = document.getElementById("moreBtn");
 	var phNumStatus = document.getElementById("phNumStatus");
-	if (len > maxPhNum) {
+	var status = phNumStatus.textContent;
+	alert(phNumStatus.textContent);
+	if (maxPhNum < parseInt(status.slice(status.indexOf(" ")).slice(3))) {
+		phNumStatus.innerHTML = maxPhNum + status.slice(status.indexOf(" "));
 		moreBtn.style.display = "inline-block";
-		phNumStatus.innerHTML = maxPhNum +" / "+ len;
 	} else {
+		phNumStatus.innerHTML = status.slice(status.indexOf(" ")).slice(3) + status.slice(status.indexOf(" "));
 		moreBtn.style.display = "none";
-		phNumStatus.innerHTML = len +" / "+ len;
+	}
+	
+	if (status.slice((status.length-3)/2+3) === status.slice(0,(status.length-3)/2)) {
+		
+	} else {
+		
 	}
 }
 
@@ -181,11 +255,11 @@ function moreBlockStatus(len, maxPhNum) {
 function itemTextHtml(urlData, faceData, urlNum) {
 	var str = `<div id="item-`+ urlNum +`" class="item">
 		<img id="thumb-`+ urlNum +`" class="thumb"
-			src="`+ urlData[0].values[urlNum][1] +`" onclick="showModal(this,'modal-`+ urlNum +`','modal-img-`+ urlNum +`')">
+			src="`+ urlData[0].values[urlNum][1] +`" onclick="showModal(this,'modal-`+ urlNum +`','modal-img-`+ urlNum +`')">   
 		<div id="modal-`+ urlNum +`" class="modal">
-			<span id="close-btn-`+ urlNum +`" class="close-btn" onclick="hideModal('modal-`+ urlNum +`'); multiDispNone('.hidden-emot')">&times;</span>
+			<span id="close-btn-`+ urlNum +`" class="close-btn" onclick="dispNone('modal-`+ urlNum +`'); multiDispNone('.hidden-emot')">&times;</span>
 			<img class="modal-img" id="modal-img-`+ urlNum +`" usemap="#ph-detail-`+ urlNum +`">`;
-
+	// `+ urlData[0].values[urlNum][1] +`
 	// if doesn't have faces/emotions
 	if (faceData[0] == null) {
 		str += `<span>Faces are faceless :c</span><hr>`;
@@ -235,7 +309,7 @@ function itemTextHtml(urlData, faceData, urlNum) {
 
 var emotCode = [{"sadness":"&#x1F614", "neutral": "&#x1F611", "disgust": "&#128078", "anger": "&#x1F620", "surprise": "&#x1F62E", "fear": "&#x1F631", "happiness": "&#x1F601"}];
 function getRandTitle() {
-	var randomPhrases = ["LOOOOOOOOOOOL","Ooh, so cute)","It's awful!","Bad idea, man!","So hungry..","Sadly, but..","Whats up?",":c","))0)00))00","AHAHAHAHAHAHA","wow, hackathon"]
+	var randomPhrases = ["LOOOOOOOOOOOL","Ooh, so cute)","It's awful!","Bad idea, man!","So hungry..","Sadly, but..","Whats up?",":c","((9(((9(99(9","))0)00))00)","AHAHAHAHAHAHA","wow, hackathon"]
 	return randomPhrases[getRandInt(0, randomPhrases.length)]
 }
 
