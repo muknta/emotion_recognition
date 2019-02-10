@@ -15,31 +15,28 @@ secret = "klLItU8XQ32F0u-mh8Wvf5o5PDRI4zss"
 # Free version limits.
 max_faces = 5
 
-# Target database.
-our_db = 'photos.db'
-
-def evaluate_emotions(db_name):
+def evaluate_emotions(db_path):
     """
-    Given the database db_name having "photos" table with photo_id, photo_url
+    Given the database db_path having "photos" table with photo_id, photo_url
     and anger, disgust, fear, happiness, neutral, sadness, surprise columns
     evaluates emotions columns using Detect API by Face++.
 
     An emotion value of a photo is the mean of this emotion's values of all faces.
     """
     # Connecting to database
-    con = sqlite3.connect(db_name)
+    con = sqlite3.connect(db_path)
 
     # Iterating through all the photos in "photos" table
     cur = con.cursor()
     data = cur.execute('SELECT photo_id, photo_url from photos').fetchall()
     cur.close()
     for id_url in data:
-
+        print(time.time())
         # Making a POST request. r contains the response
         d = {'api_key': key, 'api_secret': secret, 'image_url': id_url[1], 'return_attributes':'emotion'}
         r = requests.post(facepp_url, data=d)
         while r.status_code!=200:
-            r = requests.post(facepp_url, data=m)
+            r = requests.post(facepp_url, data=d)
 
         # Extracting faces' emotions values from response json.
         faces_count = len(r.json()['faces'])
@@ -62,5 +59,3 @@ def evaluate_emotions(db_name):
         cur.close()
     con.close()
 
-
-evaluate_emotions(our_db)

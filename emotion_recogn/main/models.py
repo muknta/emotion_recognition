@@ -7,12 +7,3 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
-class Photo(models.Model):
-    photo_id = models.TextField(unique=True, blank=True, null=True)
-    photo_url = models.TextField(blank=True, null=True)
-    json = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'photo'

@@ -61,25 +61,25 @@
 	padding: 15px 0 0;
 }
 
-.items-container .item .hidden-specs {
-	margin: 10px 40px 0;
-	/*padding: 0px 20px;*/
-	background-color: white;
-	box-shadow: 0 -10px 0px 0px #fff,
-		0 0 10px rgba(0,0,0,0.5),
-		0 20px 20px -20px rgba(0,0,0,0.5) inset;
-	overflow: hidden;
-	max-height: 0;
+.items-container .hidden-emot {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	text-align: center;
+	color: #ccc;
+	padding: 10px 0;
+	height: 150px;
 }
 
 
-.items-container .hidden-specs p:not(.descrip-text) {
+.items-container .hidden-emot p:not(.descrip-text) {
 	text-align: left;
 	font-size: 18px;
 	/*font-weight: bold;*/
 	line-height: 12px;
 }
-.items-container .hidden-specs .descrip-text {
+.items-container .hidden-emot .descrip-text {
 	font-size: 15px;
 	font-style: italic;
 }
@@ -89,7 +89,7 @@
 	/*height: auto;*/
 }
 
-.items-container .item:hover .hidden-specs {
+.items-container .item:hover .hidden-emot {
 	padding: 15px 20px 5px;
 	max-height: 500px;
 	transition: max-height 0.2s ease-in;
@@ -164,7 +164,7 @@
 
 
 @media screen and (max-width: 800px) {
-	.items-container .item .hidden-specs {
+	.items-container .item .hidden-emot {
 		margin-top: 16px;
 	}
 }

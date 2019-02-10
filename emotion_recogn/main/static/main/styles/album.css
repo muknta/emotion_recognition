@@ -1,0 +1,171 @@
+
+#moreBlock {
+	padding-left: 50%;
+}
+
+#moreBlock button,
+#moreBlock a {
+	width: 140px;
+}
+
+#moreBlock > * {
+	display: inline-block;
+}
+
+#moreBtn {
+	display: none;
+}
+
+
+.thumb {
+	object-fit: cover;
+	width:230px;
+	height:230px;
+
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.thumb:hover {
+	opacity: 0.7;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+/*
+area {
+  outline: #4CAF50 solid 10px;
+}*/
+
+/* Caption of Modal Image */
+.hidden-emot {
+	margin: auto;
+	display: none;
+	width: 80%;
+	max-width: 700px;
+	text-align: center;
+	color: #ccc;
+	padding: 10px 0;
+	height: 150px;
+}
+
+/* Add Animation */
+.modal-img, .hidden-emot {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-img {
+    width: 100%;
+  }
+}
+
+
+
+
+.flex-container {
+	display: flex;
+	/*width: 100%;*/
+	flex-flow: row nowrap;
+}
+
+.content-container {
+	display: flex;
+	width: 80%;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.flex-container .create-button {
+	margin-top: 20px;
+}
+
+.flex-container .pages {
+	flex: 1 100%;
+	text-align: center;
+}
+
+.filter > * {
+	display: block;
+}
+
+.flex-container > .filter {
+	width: auto;
+	padding: 20px 30px;
+	border-right: 3px solid #000;
+}
+
+
+.content-container > .items-container {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 20px 5%;
+	width: 100%;
+	
+	justify-content: space-around;
+}
+
+.items-container .item {
+	position: relative;
+	display: block;
+	margin: 15px 5px;
+	padding: 10px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5) ;
+}

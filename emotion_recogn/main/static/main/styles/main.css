@@ -34,14 +34,22 @@ body {
 	padding-left: 50%;
 }
 
-#moreBtn {
-	display: none;
+#moreBlock button,
+#moreBlock a {
 	width: 140px;
 }
 
-#phNumStatus{
+#moreBlock > * {
 	display: inline-block;
 }
+
+#moreBtn {
+	display: none;
+}
+/*
+#phNumStatus{
+	display: inline-block;
+}*/
 
 #header {
 	overflow: hidden;

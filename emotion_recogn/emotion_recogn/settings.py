@@ -80,10 +80,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'photos': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'D:/django/emotion_recogn/photos.db',
-    }
 }
 
 
@@ -124,4 +120,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-DATABASE_URL = '/static/main/photos.db'
+DATABASE_URL = './main/static/main/photos.db'

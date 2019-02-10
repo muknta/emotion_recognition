@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css-includes %}
-	
+	<link rel="stylesheet" href="{% static 'main/styles/album.css' %}">
 {% endblock css-includes %}
 
 
@@ -47,7 +47,8 @@
 		</div>
 	</div>
 	<div id="moreBlock">
-		<a id="moreBtn" class="btn btn-success btn-block" href="#">Load more</a>
+		<a id="update" href="{% url 'update' %}" class="btn btn-danger btn-block">UPDATE</a>
+		<button id="moreBtn" class="btn btn-success btn-block" type="button">Load more</button>
 		<span id="phNumStatus"></span>
 	</div>
 {% endblock content %}
@@ -55,11 +56,10 @@
 
 
 {% block js-includes %}
-	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/sql.js"></script>
-	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/worker.sql.js"></script>
+	<!-- <script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/sql.js"></script> -->
+	<!-- <script type="text/javascript" src="http://cdn.jsdelivr.net/gh/kripken/sql.js/js/worker.sql.js"></script> -->
+	<script src="{% static 'main/scripts/sql.js' %}"></script>
+	<script src="{% static 'main/scripts/worker.sql.js' %}"></script>
+	
 	<script src="{% static 'main/scripts/main.js' %}"></script>
-<script type="text/javascript">
-
-
-</script>
 {% endblock js-includes %}
