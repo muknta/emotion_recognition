@@ -158,7 +158,7 @@ function showMore(db, urlData) {
 				alb.innerHTML += itemTextHtml(urlData, faceData, i);
 	    	}
         } else {
-        	alert("asdddddsad");
+        	// alert("asdddddsad");
         	len--;
         	savedMaxPh--;
         	break;
@@ -194,7 +194,7 @@ function setMaxElemNum(db) {
 					minPh++;
 				}
 	        } else {
-	        	alert("asdddddsad");
+	        	// alert("asdddddsad");
 	        	len--;
 	        	break;
 	        }
@@ -235,7 +235,7 @@ function moreBlockStatus(maxPhNum) {
 	var moreBtn = document.getElementById("moreBtn");
 	var phNumStatus = document.getElementById("phNumStatus");
 	var status = phNumStatus.textContent;
-	alert(phNumStatus.textContent);
+	// alert(phNumStatus.textContent);
 	if (maxPhNum < parseInt(status.slice(status.indexOf(" ")).slice(3))) {
 		phNumStatus.innerHTML = maxPhNum + status.slice(status.indexOf(" "));
 		moreBtn.style.display = "inline-block";
