@@ -126,7 +126,7 @@ function getAjax() {
 function loadRequest(evt) {
 	var uInt8Array = new Uint8Array(this.response);
 	var db = new SQL.Database(uInt8Array);
-	//var res = db.exec("SELECT name FROM sqlite_master where type='table'");
+
 	var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
 	if (urlData[0]) {
 		showMore(db, urlData);
@@ -146,8 +146,7 @@ function showMore(db, urlData) {
 	var faceData;
 	var len = (urlData[0] ? urlData[0].values.length : 0);
 	var maxPagePh = (len>maxPh ? maxPh : len);
-	// savedMaxPh += SHOW_PH_NUM;
-	// var savedMaxPh = maxPh;
+
 	var alb = document.getElementById("album");
 	for (var i = minPh-1; i < maxPagePh; i++) {
         savedMaxPh++;
@@ -183,7 +182,6 @@ function setMaxElemNum(db) {
 		}
 	}
 	var phNumStatus = document.getElementById("phNumStatus");
-	// phNumStatus.innerHTML = "";
 	var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
 	if (trigger) {
 		var faceData;

@@ -5,6 +5,7 @@ This webapp was created using Django framework.
 <h1>Django 2.1.5</h1>
 <p>Site contains 3 templates.</p>
 <p>There are base.html, that spread to all other templates, index.html - main page, album.html - contains photos and filter for photos by emotions.</p>
+<p>Filter acts on the face emotions(>9%).</p>
 
 <h1>DATABASE</h1>
 <p>We were using sqlite3 database. It contains two tables: faces, photos. </p>
@@ -23,7 +24,7 @@ This webapp was created using Django framework.
  <p><p> To open our webapp go to console and open manage.py (emotion_recognition/emotion_recogn/manage.py) with runserver parameter: </p>
  <p>  "python manage.py runserver" </p>
 
-In case it won't run, it might be necessary to download some packages (e.g. djangorestapi). Use pip for this purpose.
+In case it won't run, it might be necessary to download some packages (e.g. flickrapi, djangorestframework). Use pip for this purpose.
 </p>
 
 
