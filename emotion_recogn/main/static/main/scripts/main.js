@@ -70,13 +70,10 @@ for (var i = 0; i < emotions.length; i++) {
 }
 var ajaxInter;
 document.getElementById("update").addEventListener("click", function(){
-	resetParams();
-	for (var g=0;g<30;g++) {
-		demo();
+		resetParams();
+		getDBtoSetLimit();
 		getAjax();
-	}
-	// ajaxInter = setInterval(getAjax, 2000);
-});
+	});
 
 
 function sleep(ms) {
