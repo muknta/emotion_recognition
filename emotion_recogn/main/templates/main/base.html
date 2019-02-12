@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'main/styles/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'main/styles/main.css' %}">
-	
-
 	{% block css-includes %}{% endblock css-includes %}
 </head>
 <body>
@@ -24,6 +22,8 @@
 	</div>
 	{% block content %}{% endblock content %}
 
+	<!-- jquery..min.js(not slim)
+		need for maphilight.min.js -->
 	<script src="{% static 'main/scripts/jquery-3.3.1.min.js' %}"></script>
 	<script src="{% static 'main/scripts/popper.min.js' %}"></script>
 	<script src="{% static 'main/scripts/bootstrap.min.js' %}"></script>

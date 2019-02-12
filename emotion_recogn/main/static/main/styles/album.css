@@ -1,10 +1,72 @@
+.flex-container {
+	display: flex;
+	/*width: 100%;*/
+	flex-flow: row nowrap;
+}
 
-#moreBlock {
-	padding-left: 50%;
+.content-container {
+	display: flex;
+	width: 80%;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+#filter > * {
+	display: block;
+}
+
+.flex-container > #filter {
+	width: auto;
+	padding: 20px 30px;
+}
+
+
+.content-container > .items-container {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 20px 5%;
+	width: 100%;
+	
+	justify-content: space-around;
+}
+
+.items-container .item {
+	position: relative;
+	display: block;
+	margin: 15px 5px;
+	padding: 10px;
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5) ;
+}
+
+
+#initLegend {
+	text-align: center;
+	font-size: 30px;
+}
+
+
+.sticky-filter {
+	z-index: 1;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+}
+
+.sticky-filter + .content-container {
+	margin-left: 150.6px;
+}
+
+
+#moreBlock,
+#updBlock a {
+	margin-left: 50%;
 }
 
 #moreBlock button,
-#moreBlock a {
+#updBlock a {
 	width: 140px;
 }
 
@@ -14,6 +76,15 @@
 
 #moreBtn {
 	display: none;
+}
+
+#updBlock {
+	text-align: center;
+	padding: 50px 0;
+}
+
+#updBlock span {
+	margin-left: 100px;
 }
 
 
@@ -112,60 +183,4 @@ area {
   .modal-img {
     width: 100%;
   }
-}
-
-
-
-
-.flex-container {
-	display: flex;
-	/*width: 100%;*/
-	flex-flow: row nowrap;
-}
-
-.content-container {
-	display: flex;
-	width: 80%;
-	flex-flow: row wrap;
-	justify-content: center;
-}
-
-.flex-container .create-button {
-	margin-top: 20px;
-}
-
-.flex-container .pages {
-	flex: 1 100%;
-	text-align: center;
-}
-
-.filter > * {
-	display: block;
-}
-
-.flex-container > .filter {
-	width: auto;
-	padding: 20px 30px;
-	border-right: 3px solid #000;
-}
-
-
-.content-container > .items-container {
-	display: flex;
-	flex-flow: row wrap;
-	padding: 20px 5%;
-	width: 100%;
-	
-	justify-content: space-around;
-}
-
-.items-container .item {
-	position: relative;
-	display: block;
-	margin: 15px 5px;
-	padding: 10px;
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-	box-shadow: 0 0 5px rgba(0,0,0,0.5) ;
 }

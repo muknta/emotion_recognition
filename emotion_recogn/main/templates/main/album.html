@@ -9,8 +9,7 @@
 
 {% block content %}
 	<div class="flex-container">
-		<div class="filter">
-			
+		<div id="filter">
 			<h2>FILTER</h2>
 			<input class="form-check-input" type="checkbox" id="anger-check" value="anger">
 			<label class="form-check-label" for="anger-check">
@@ -42,15 +41,19 @@
 			</label>
 		</div>
 		<div class="content-container">
+			<span id="initLegend">Please, wait a few seconds...</span>
 			<div id="album" class="items-container">
 				
 			</div>
 		</div>
 	</div>
 	<div id="moreBlock">
-		<a id="update" href="{% url 'update' %}" class="btn btn-danger btn-block">UPDATE</a>
-		<a id="moreBtn" class="btn btn-success btn-block">Load more</a>
+		<button id="moreBtn" class="btn btn-success btn-block">Load more</button>
 		<span id="phNumStatus"></span>
+	</div>
+	<div id="updBlock">
+		<a id="update" href="{% url 'update' %}" class="btn btn-danger btn-block">Update</a>
+		<span>It will update photo info in DB for a minute in the background.</span>
 	</div>
 {% endblock content %}
 
