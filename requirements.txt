@@ -1,0 +1,13 @@
+certifi==2018.11.29
+chardet==3.0.4
+Django==2.1.5
+djangorestframework==3.9.1
+flickrapi==2.4.0
+idna==2.8
+oauthlib==3.0.1
+pytz==2018.9
+requests==2.21.0
+requests-oauthlib==1.2.0
+requests-toolbelt==0.9.1
+six==1.12.0
+urllib3==1.24.1
