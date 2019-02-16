@@ -127,7 +127,7 @@ function loadRequest(evt) {
 	var uInt8Array = new Uint8Array(this.response);
 	var db = new SQL.Database(uInt8Array);
 
-	var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
+	var urlData = db.exec(`SELECT * FROM ${URL_TABLE}`);
 	if (urlData[0]) {
 		showMore(db, urlData);
 		minPh += SHOW_PH_NUM;
@@ -182,7 +182,7 @@ function setMaxElemNum(db) {
 		}
 	}
 	var phNumStatus = document.getElementById("phNumStatus");
-	var urlData = db.exec("SELECT * FROM "+ URL_TABLE);
+	var urlData = db.exec(`SELECT * FROM ${URL_TABLE}`);
 	if (trigger) {
 		var faceData;
 		var len = (urlData[0] ? urlData[0].values.length : 0);
@@ -202,21 +202,21 @@ function setMaxElemNum(db) {
 	        }
 	    }
 	    phNumStatus.innerHTML = "";
-		phNumStatus.innerHTML = " / "+ len;
+		phNumStatus.innerHTML = ` / ${len}`;
 	} else {
 		if (urlData[0].values[0]) {
-			phNumStatus.innerHTML = " / "+ urlData[0].values.length;
+			phNumStatus.innerHTML = ` / ${urlData[0].values.length}`;
 		}
 	}
 }
 
 
 function getFaceExecCmd(photoId) {
-	var str = "SELECT * FROM "+ FACE_TABLE +" WHERE photo_id IS "+ photoId;
+	var str = `SELECT * FROM ${FACE_TABLE} WHERE photo_id IS ${photoId}`;
 	var oldLen = str.length;
 	for (var i = 0; i < emotions.length; i++) {
 		if (emotions[i].checked) {
-			str += " AND "+ emotions[i].value +">9";
+			str += ` AND ${emotions[i].value}>9`;
 		}
 	}
 	// str += (oldLen<str.length ?" AND ":" WHERE ")
@@ -226,7 +226,7 @@ function getFaceExecCmd(photoId) {
 
 
 function getUrlExecCmd(photoId) {
-	var str = "SELECT * FROM "+ URL_TABLE +" WHERE photo_id IS NOT "+ photoId;
+	var str = `SELECT * FROM ${URL_TABLE} WHERE photo_id IS NOT ${photoId}`;
 	return str;
 }
 
@@ -247,17 +247,17 @@ function moreBlockStatus(maxPhNum) {
 
 
 function itemTextHtml(urlData, faceData, urlNum) {
-	var str = `<div id="item-`+ urlNum +`" class="item">
-		<img id="thumb-`+ urlNum +`" class="thumb"
-			src="`+ urlData[0].values[urlNum][1] +`" onclick="showModal(this,'modal-`+ urlNum +`','modal-img-`+ urlNum +`')">   
-		<div id="modal-`+ urlNum +`" class="modal">
-			<span id="close-btn-`+ urlNum +`" class="close-btn" onclick="dispNone('modal-`+ urlNum +`'); multiDispNone('.hidden-emot')">&times;</span>
-			<img class="modal-img" id="modal-img-`+ urlNum +`" usemap="#ph-detail-`+ urlNum +`">`;
+	var str = `<div id="item-${urlNum}" class="item">
+		<img id="thumb-${urlNum}" class="thumb"
+			src="${urlData[0].values[urlNum][1]}" onclick="showModal(this,'modal-${urlNum}','modal-img-${urlNum}')">   
+		<div id="modal-${urlNum}" class="modal">
+			<span id="close-btn-${urlNum}" class="close-btn" onclick="dispNone('modal-${urlNum}'); multiDispNone('.hidden-emot')">&times;</span>
+			<img class="modal-img" id="modal-img-${urlNum}" usemap="#ph-detail-${urlNum}">`;
 	// if doesn't have faces/emotions
 	if (faceData[0] == null) {
 		str += `<span>Faces are faceless :c</span><hr>`;
 	} else {
-		str += `<map name="ph-detail-`+ urlNum +`">`;
+		str += `<map name="ph-detail-${urlNum}">`;
 		var x, y, R;
 
 		for(var i = 0; i < faceData[0].values.length; i++) {
@@ -271,10 +271,10 @@ function itemTextHtml(urlData, faceData, urlNum) {
 			y = faceData[0].values[i][9]/1.5;
 			R = (faceData[0].values[i][8] + faceData[0].values[i][11])/2;
 
-			str += `<area id="area-`+ urlNum +`-`+ i +`"
-				shape="circle" coords="`+ x +`,`+ y +`,`+ R +`"
-				onmouseover="multiDispNone('.hidden-emot'); dispBlock('h-em-`+ urlNum +`-`+ i +`')"
-				alt="link" title="`+getRandTitle()+`">`;
+			str += `<area id="area-${urlNum}-${i}"
+				shape="circle" coords="${x},${y},${R}"
+				onmouseover="multiDispNone('.hidden-emot'); dispBlock('h-em-${urlNum}-${i}')"
+				alt="link" title="${getRandTitle()}">`;
 		}
 		str += `</map>`;
 		var sortedObj = [];
@@ -286,10 +286,10 @@ function itemTextHtml(urlData, faceData, urlNum) {
 			}
 			sortedObj = sortObj(dict);
 
-			str += `<div id="h-em-`+ urlNum +`-`+ i +`" class="hidden-emot">`;
+			str += `<div id="h-em-${urlNum}-${i}" class="hidden-emot">`;
 			for(var j = 0; j < emotions.length; j++) {
 				str += `<p class="arcticle-content">
-						<span class="descrip-text">`+ sortedObj[j][0] +`:</span> `+ sortedObj[j][1].toFixed(3) +`%
+						<span class="descrip-text">${sortedObj[j][0]}:</span> ${sortedObj[j][1].toFixed(3)}%
 					</p>`;
 			}
 			str += `</div>`
