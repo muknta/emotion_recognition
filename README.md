@@ -1,6 +1,7 @@
-The website was Inspired by INT20H Hackaton.
+<i>release -- olephirs.herokuapp.com</i> <br>
+The website was Inspired by INT20H Hackathon.
 
-This webapp was created using Django framework. 
+Webapp was created using Django framework. 
 
 <h1>Django 2.1.5</h1>
 <p>Site contains 3 templates.</p>
@@ -32,10 +33,10 @@ In case it won't run, it might be necessary to download some packages (e.g. flic
 ABOUT US.
 We are a team of aspiring students from KPI.
 
-Our githubs:
-	Nikita: https://github.com/heknt
-	Nazar: https://github.com/NazarKostetskiy
-	Bohdan: https://github.com/deepwebhoax
+Our githubs: <br>
+	Nikita: https://github.com/heknt <br>
+	Nazar: https://github.com/NazarKostetskiy <br>
+	Bohdan: https://github.com/deepwebhoax <br>
 	Dmitro: https://github.com/LuSTiK-2017
 
 
